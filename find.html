@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Find a Friend</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .container {
+            width: 90%;
+            margin-top: 50px;
+            text-align: center;
+        }
+
+        .back-button {
+            text-align: left;
+            margin-bottom: 20px;
+        }
+
+        .back-button a {
+            text-decoration: none;
+            color: #FF7643;
+            font-size: 16px;
+            font-weight: bold;
+        }
+
+        h1 {
+            color: #FF7643;
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        .toggle-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .toggle-buttons button {
+            flex: 1;
+            padding: 10px;
+            border: 2px solid #FF7643;
+            border-radius: 20px;
+            background-color: white;
+            color: #FF7643;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .toggle-buttons button.active {
+            background-color: #FF7643;
+            color: white;
+        }
+
+        .section-title {
+            font-size: 18px;
+            font-weight: bold;
+            color: #FF7643;
+            text-align: left;
+            margin: 30px 0;
+        }
+
+        .options {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+
+        .options button {
+            flex: 1;
+            padding: 10px;
+            border: 2px solid #FF7643;
+            border-radius: 20px;
+            background-color: white;
+            color: #333;
+            font-size: 14px;
+            cursor: pointer;
+        }
+
+        .options button.active {
+            background-color: #FF7643;
+            color: white;
+        }
+
+        .submit-button {
+            width: 100%;
+            padding: 15px;
+            background-color: #FF7643;
+            border: none;
+            border-radius: 25px;
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 80px;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="back-button">
+        <a href="list.html">&#8592; Back</a>
+    </div>
+    <h1>Find a Friend</h1>
+
+    <div class="toggle-buttons">
+        <button class="active">Cats</button>
+        <button>Dogs</button>
+    </div>
+
+    <div class="section">
+        <div class="section-title">Gender</div>
+        <div class="options">
+            <button>Female</button>
+            <button>Male</button>
+        </div>
+    </div>
+
+    <div class="section">
+        <div class="section-title">Size</div>
+        <div class="options">
+            <button>Small</button>
+            <button>Medium</button>
+            <button>Large</button>
+        </div>
+    </div>
+
+    <div class="section">
+        <div class="section-title">Age</div>
+        <div class="options">
+            <button>Baby</button>
+            <button>Young</button>
+            <button>Adult</button>
+        </div>
+    </div>
+
+    <button class="submit-button">SUBMIT</button>
+</div>
+
+<script>
+    // JavaScript to toggle active buttons
+    const toggleButtons = document.querySelectorAll('.toggle-buttons button');
+    const optionButtons = document.querySelectorAll('.options button');
+
+    toggleButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            toggleButtons.forEach(btn => btn.classList.remove('active'));
+            button.classList.add('active');
+        });
+    });
+
+    optionButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            const siblings = button.parentElement.querySelectorAll('button');
+            siblings.forEach(btn => btn.classList.remove('active'));
+            button.classList.add('active');
+        });
+    });
+</script>
+</body>
+</html>

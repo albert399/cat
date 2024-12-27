@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #fff;
+            color: #333;
+        }
+
+        .header {
+            background-color: #FFC2A1;
+            padding: 15px;
+            display: flex;
+            align-items: center;
+        }
+
+        .header a {
+            text-decoration: none;
+            font-size: 18px;
+            color: #fff;
+        }
+
+        .title {
+            text-align: center;
+            padding: 15px;
+        }
+
+        .title h1 {
+            margin: 0;
+            color: #FF5733;
+            font-size: 24px;
+        }
+
+        .gallery img {
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
+        }
+        .gallery {
+            padding: 15px;
+        }
+
+        .amount-section {
+            background-color: #FFEDE6;
+            margin: 15px;
+            padding: 15px;
+            border-radius: 8px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 18px;
+        }
+
+        .amount-section span {
+            color: #FF5733;
+            font-weight: bold;
+        }
+
+        .actions {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            position: absolute;
+            bottom: 15px;
+            width: 100%;
+        }
+
+        .actions button {
+            background-color: #FF5733;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            height: 55px;
+        }
+
+        .actions button:hover {
+            background-color: #e04d2e;
+        }
+
+        .actions a {
+            color: #FF5733;
+            text-decoration: none;
+            font-size: 16px;
+            display: flex;
+            gap: 10px;
+            flex-direction: column;
+            align-items: center;
+        }
+    </style>
+</head>
+<body>
+
+<div class="header">
+    <a href="list.html">&larr; Home</a>
+</div>
+
+<div class="title">
+    <h1>Davis Pet Shelter</h1>
+    <p>Rescue Fund Raising</p>
+</div>
+
+<div class="gallery">
+    <img src="image/zu.jpg" width="100%">
+</div>
+
+<div class="amount-section">
+    <div>Target amount: <span>$3000</span></div>
+    <div>Amount Raised: <span>$2400</span></div>
+</div>
+
+<div class="actions">
+    <a href="#"><img src="image/star.png" width="30px">Follow</a>
+    <button>SUPPORT</button>
+    <a href="#"><img src="image/share.png" width="30px">Share</a>
+</div>
+
+</body>
+</html>

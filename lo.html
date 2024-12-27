@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pet Shelter Map</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #fff9e6;
+        }
+
+        .header {
+            background-color: #ffd965;
+            padding: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .header a {
+            text-decoration: none;
+            color: #000;
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .header .title {
+            font-size: 20px;
+            color: #ff8c00;
+        }
+
+        #map {
+            width: 100%;
+            height: 100vh;
+            background: url('image/map.jpg') no-repeat center center/cover;
+            position: relative;
+        }
+
+        .animal-icon {
+            position: absolute;
+            cursor: pointer;
+            transform: translate(-50%, -50%);
+            font-size: 24px;
+        }
+
+        .toggle-buttons {
+            margin: 15px;
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .toggle-buttons button {
+            padding: 10px 25px;
+            border: none;
+            border-radius: 20px;
+            background-color: #ffeb99;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .toggle-buttons .active {
+            background-color: #ffd965;
+        }
+
+        .card {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: white;
+            width: 90%;
+            border-radius: 15px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 15px;
+            display: none;
+            text-align: center;
+        }
+
+        .card img {
+            width: 100%;
+            border-radius: 10px;
+        }
+
+        .card .details {
+            margin-top: 10px;
+            text-align: left;
+        }
+
+        .card .details h2 {
+            margin: 0;
+            font-size: 22px;
+            color: #ff8c00;
+        }
+
+        .card .details p {
+            margin: 5px 0;
+            font-size: 16px;
+        }
+
+        .card .details .icon {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .card .details .icon svg {
+            width: 16px;
+            height: 16px;
+        }
+
+        .card .heart {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            font-size: 20px;
+            color: #ff0000;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+<div class="header">
+    <a href="#">&#8592; Back</a>
+</div>
+
+<div class="toggle-buttons">
+    <button class="active" id="toggle-pets">Pet</button>
+    <button id="toggle-shelters">Shelter</button>
+</div>
+<div id="map"></div>
+
+
+<div class="card" id="info-card">
+    <span class="heart">&#9829;</span>
+    <img id="card-image" src="" alt="Pet">
+    <div class="details">
+        <h2 id="card-name">Mac</h2>
+        <p><span class="icon">&#128205;</span> <span id="card-distance">6.8 min</span></p>
+        <p><span class="icon">&#128205;</span> <span id="card-address">496 La Rue Rd, Davis</span></p>
+        <p><span class="icon">&#128337;</span> <span id="card-age">8 months</span></p>
+        <p><span class="icon">&#9794;</span> <span id="card-gender">Male</span></p>
+    </div>
+</div>
+
+<script>
+    const map = document.getElementById('map');
+    const card = document.getElementById('info-card');
+    const pets = [
+        {
+            id: 1,
+            name: 'Mac',
+            image: 'https://via.placeholder.com/150',
+            distance: '6.8 min',
+            address: '496 La Rue Rd, Davis',
+            age: '8 months',
+            gender: 'Male',
+            x: '30%',
+            y: '40%'
+        },
+        {
+            id: 2,
+            name: 'Bella',
+            image: 'https://via.placeholder.com/150',
+            distance: '5.2 min',
+            address: '123 Oak St, Davis',
+            age: '2 years',
+            gender: 'Female',
+            x: '50%',
+            y: '60%'
+        },
+        {
+            id: 3,
+            name: 'Charlie',
+            image: 'https://via.placeholder.com/150',
+            distance: '7.5 min',
+            address: '789 Pine Rd, Davis',
+            age: '1 year',
+            gender: 'Male',
+            x: '70%',
+            y: '20%'
+        },
+        {
+            id: 4,
+            name: 'Lucy',
+            image: 'https://via.placeholder.com/150',
+            distance: '4.1 min',
+            address: '456 Maple Ave, Davis',
+            age: '3 years',
+            gender: 'Female',
+            x: '40%',
+            y: '80%'
+        }
+    ];
+
+    pets.forEach(pet => {
+        const icon = document.createElement('div');
+        icon.classList.add('animal-icon');
+        icon.style.left = pet.x;
+        icon.style.top = pet.y;
+        icon.innerHTML = pet.gender === 'Male' ? '&#128054;' : '&#128049;';
+        map.appendChild(icon);
+
+        icon.addEventListener('click', () => {
+            document.getElementById('card-name').innerText = pet.name;
+            document.getElementById('card-image').src = pet.image;
+            document.getElementById('card-distance').innerText = pet.distance;
+            document.getElementById('card-address').innerText = pet.address;
+            document.getElementById('card-age').innerText = pet.age;
+            document.getElementById('card-gender').innerText = pet.gender;
+
+            card.style.display = 'block';
+        });
+    });
+</script>
+</body>
+</html>

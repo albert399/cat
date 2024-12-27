@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pet Adoption</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+        a {text-decoration: none;}
+        body {
+            background-color: #fff8e1;
+            color: #333;
+        }
+
+        .header {
+            width: 100%;
+            height: 165px;
+            overflow: hidden;
+            position: relative;
+            border-radius: 8px;
+        }
+
+        .header img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+        }
+
+        .menu {
+            display: flex;
+            justify-content: space-around;
+            padding: 15px 0;
+        }
+
+        .menu-item {
+            font-size: 16px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+        }
+        .menu-item a {
+            font-size: 16px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            text-decoration: none;
+            color: #000;
+        }
+        .menu-item img {
+            width: 50px;
+            margin-bottom: 10px;
+        }
+
+        .filter {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            justify-content: space-around;
+            margin: 15px 0;
+        }
+
+        .filter button {
+            padding: 8px 15px;
+            border: none;
+            flex: 1;
+            border-radius: 20px;
+            background-color: #ffd54f;
+            color: #fff;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        .pet-card {
+            display: flex;
+            gap: 15px;
+            background: #fff;
+            margin: 10px 0;
+            padding: 10px;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .pet-image {
+            width: 80px;
+            height: 80px;
+            border-radius: 10px;
+            margin-right: 10px;
+        }
+
+        .pet-info h3 {
+            margin: 5px 0;
+            font-size: 16px;
+            color: #000;
+        }
+
+        .pet-info p {
+            font-size: 14px;
+            color: #000;
+        }
+
+        .footer {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            display: flex;
+            justify-content: space-around;
+            background: #ffd54f;
+            padding: 10px 0;
+        }
+
+        .footer-item {
+            font-size: 14px;
+            text-align: center;
+            color: #fff;
+            cursor: pointer;
+        }
+
+        .add-btn a {
+            font-size: 24px !important;
+            background: #fccc6f;
+            color: #fff !important;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: -20px;
+            text-decoration: none;
+        }
+        .header-content {
+            margin: 15px;
+        }
+        .heade-color {
+            background: #fbcd6e;
+            width: 100%;
+            height: 50px;
+        }
+        .footer-item img {
+            width: 50px;
+            margin: 10px auto;
+        }
+        .footer-item,
+        .footer-item a{
+            display: flex;
+            flex-direction: column;
+            color: #000;
+            font-size: 16px;
+        }
+        .pet-card img {
+            width: 100px;
+            border-radius: 8px;
+        }
+        .timep {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        .pet-list {
+            height: 700px;
+        }
+    </style>
+</head>
+<body>
+<div class="heade-color"></div>
+<div class="header-content">
+    <div class="header">
+        <img src="image/cat-list.jpg">
+    </div>
+
+    <div class="menu">
+        <div class="menu-item"><a href="find.html"><img src="image/fdj.png">Find</a></div>
+        <div class="menu-item"><img src="image/ax.png">Donate</div>
+        <div class="menu-item"><a href="game.html"><img src="image/sd.png">Game</a></div>
+    </div>
+
+    <div class="filter">
+        <img src="image/lo.png" width="30">
+        <p>Nearby</p>
+        <button>Cat</button>
+        <button>Dog</button>
+        <button>Others</button>
+    </div>
+
+    <div class="pet-list">
+        <div class="pet-card">
+            <img src="image/mao1.jpg">
+            <div class="pet-info">
+                <h3 style="margin-top: 10px;">Tina</h3>
+                <p style="margin-bottom: 10px;">1260 Lake Blvd, Davis</p>
+                <p class="timep"><img src="image/time.png" style="width: 20px;">7 months</p>
+                <p class="timep"><img src="image/nv.png" style="width: 20px;">Female</p>
+            </div>
+        </div>
+        <div class="pet-card">
+            <img src="image/mao2.jpg">
+            <div class="pet-info">
+                <h3 style="margin-top: 10px;">Cookie</h3>
+                <p style="margin-bottom: 10px;">1976 Lake Blvd, Davis</p>
+                <p class="timep"><img src="image/time.png" style="width: 20px;">2 years</p>
+                <p class="timep"><img src="image/nv.png" style="width: 20px;">Male</p>
+            </div>
+        </div>
+        <div class="pet-card">
+            <img src="image/mao3.jpg">
+            <div class="pet-info">
+                <h3 style="margin-top: 10px;">cat</h3>
+                <p style="margin-bottom: 10px;">1260 Lake Blvd, Davis</p>
+                <p class="timep"><img src="image/time.png" style="width: 20px;">7 months</p>
+                <p class="timep"><img src="image/nv.png" style="width: 20px;">Female</p>
+            </div>
+        </div>
+        <div class="pet-card">
+            <img src="image/mao4.jpg">
+            <div class="pet-info">
+                <h3 style="margin-top: 10px;">lucky</h3>
+                <p style="margin-bottom: 10px;">1976 Lake Blvd, Davis</p>
+                <p class="timep"><img src="image/time.png" style="width: 20px;">2 years</p>
+                <p class="timep"><img src="image/nv.png" style="width: 20px;">Male</p>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="footer">
+    <div class="footer-item"><a href="list.html"><img src="image/home.png">Home</a></div>
+    <div class="footer-item"><img src="image/fav.png">Favorites</div>
+    <div class="footer-item add-btn"><a href="add.html">+</a></div>
+    <div class="footer-item"><img src="image/message.png">Messages</div>
+    <div class="footer-item"><img src="image/zx.png">Profile</div>
+</div>
+</body>
+</html>
