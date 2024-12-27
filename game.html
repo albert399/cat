@@ -3,13 +3,31 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Rain Game</title>
   <style>
     body {
       margin: 0;
       overflow: hidden;
       background-color: black;
       font-family: Arial, sans-serif;
+    }
+
+    .cover {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: #fff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 2000;
+    }
+
+    .cover img {
+      width: 100%;
+      height: 95%;
+      cursor: pointer;
     }
 
     .scoreboard, .timer {
@@ -37,11 +55,15 @@
   </style>
 </head>
 <body>
+<div class="cover">
+  <img src="image/gbg.jpg" alt="Click to Start">
+</div>
 <div class="scoreboard">Score: 0</div>
 <div class="timer">Time: 15s</div>
 
 <script>
   const body = document.body;
+  const cover = document.querySelector('.cover');
   const scoreboard = document.querySelector('.scoreboard');
   const timer = document.querySelector('.timer');
   let score = 0;
@@ -49,6 +71,26 @@
   let gameInterval;
   let countdown;
   const droplets = [];
+
+  function startGame() {
+    cover.style.display = 'none';
+    gameInterval = setInterval(() => {
+      createDroplet();
+    }, 500);
+
+    countdown = setInterval(() => {
+      timeLeft--;
+      timer.textContent = `Time: ${timeLeft}s`;
+
+      if (timeLeft <= 0) {
+        clearInterval(gameInterval);
+        clearInterval(countdown);
+        alert(`Game over! Your score is ${score}`);
+      }
+    }, 1000);
+  }
+
+  cover.addEventListener('click', startGame);
 
   function randomPosition(max) {
     return Math.random() * max;
@@ -87,7 +129,7 @@
             attempts < maxAttempts
             );
 
-    if (attempts === maxAttempts) return; // Stop if unable to place droplet
+    if (attempts === maxAttempts) return;
 
     droplet.setAttribute("width", size);
     droplet.setAttribute("height", size * 1.5);
@@ -129,82 +171,19 @@
     path2.setAttribute("fill", "url(#test)");
     path2.setAttribute("transform", "translate(40 -20) rotate(10)");
 
-    const circles = [
-      { cx: 140, cy: 210, r: 8, fill: "#4d5cb1" },
-      { cx: 210, cy: 210, r: 8, fill: "#4d5cb1" },
-      { cx: 124, cy: 232, r: 10, fill: "#ffc6d7" },
-      { cx: 226, cy: 232, r: 10, fill: "#ffc6d7" }
-    ];
-
-    const circleElements = circles.map(({ cx, cy, r, fill }) => {
-      const circle = document.createElementNS("http://www.w3.org/2000/svg", "circle");
-      circle.setAttribute("cx", cx);
-      circle.setAttribute("cy", cy);
-      circle.setAttribute("r", r);
-      circle.setAttribute("fill", fill);
-      return circle;
-    });
-
-    const path3 = document.createElementNS("http://www.w3.org/2000/svg", "path");
-    path3.setAttribute("d", "M160,230a22,22 0 0 0 30,0a3.5,3.5 0 0 0 -5,-5a15,15 0 0 1 -20,0a3.5,3.5 0 0 0 -5,5");
-    path3.setAttribute("fill", "#4d5cb1");
-
-    const path4 = document.createElementNS("http://www.w3.org/2000/svg", "path");
-    path4.setAttribute("d", "M321,263 a50,50 0 0 0 18,40 a2,2 0 0 0 4,-4 a47,47 0 0 1 -17,-36 a2.5,2.5 0 0 0 -5,0");
-    path4.setAttribute("fill", "#4d5cb1");
-
     droplet.appendChild(defs);
     droplet.appendChild(path1);
     droplet.appendChild(path2);
-    circleElements.forEach(circle => droplet.appendChild(circle));
-    droplet.appendChild(path3);
-    droplet.appendChild(path4);
 
     droplet.addEventListener('click', () => {
       score += pointValue;
       scoreboard.textContent = `Score: ${score}`;
-
-      let position = parseFloat(droplet.style.top);
-      const fallInterval = setInterval(() => {
-        position += 5;
-        droplet.style.top = `${position}px`;
-
-        if (position > window.innerHeight) {
-          droplet.remove();
-          clearInterval(fallInterval);
-        }
-      }, 16);
+      droplet.remove();
     });
 
     body.appendChild(droplet);
     droplets.push(droplet);
   }
-
-  function startGame() {
-    gameInterval = setInterval(() => {
-      createDroplet();
-    }, 500);
-
-    countdown = setInterval(() => {
-      timeLeft--;
-      timer.textContent = `Time: ${timeLeft}s`;
-
-      if (timeLeft <= 0) {
-        clearInterval(gameInterval);
-        clearInterval(countdown);
-        alert(`Game over! Your score is ${score}`);
-      }
-    }, 1000);
-  }
-
-  startGame();
-
-  window.addEventListener("resize", () => {
-    document.querySelectorAll("svg").forEach(droplet => {
-      const maxWidth = window.innerWidth - parseFloat(droplet.getAttribute("width"));
-      droplet.style.left = `${Math.min(parseFloat(droplet.style.left), maxWidth)}px`;
-    });
-  });
 </script>
 </body>
 </html>
