@@ -1,151 +1,190 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Find Your Best Friend</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      margin: 0;
+      overflow: hidden;
+      background-color: black;
+      font-family: Arial, sans-serif;
+    }
 
-        body {
-            font-family: Arial, sans-serif;
-            background: #000;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            overflow: hidden;
-        }
-        a {text-decoration: none;}
-        .container {
-            position: relative;
-            width: 100%;
-            height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            overflow: hidden;
-            background: #000;
-            color: white;
-        }
+    .cover {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: #fff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 2000;
+    }
 
-        .header {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            z-index: 2;
-        }
+    .cover img {
+      width: 100%;
+      height: 95%;
+      cursor: pointer;
+    }
 
-        .skip {
-            font-size: 14px;
-            background: #fbb03b;
-            cursor: pointer;
-            font-weight: bold;
-            color: #fff;
-            padding: 10px 20px;
-            border-radius: 8px;
-        }
+    .scoreboard, .timer {
+      position: absolute;
+      font-size: 20px;
+      color: white;
+      padding: 10px;
+      z-index: 1000;
+    }
 
-        .content {
-            position: relative;
-            text-align: center;
-            z-index: 2;
-            margin-top: 150px;
-        }
+    .scoreboard {
+      top: 10px;
+      left: 10px;
+    }
 
-        h1 {
-            font-size: 24px;
-            margin-bottom: 20px;
-        }
+    .timer {
+      top: 10px;
+      right: 10px;
+    }
 
-        .profile-pic img {
-            width: 100px;
-            height: 100px;
-            border-radius: 50%;
-            background: #fff;
-        }
-
-        .subtitle {
-            font-size: 16px;
-            margin-top: 10px;
-        }
-
-        .background {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            height: 100vh;
-        }
-
-        .background img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            position: absolute;
-            opacity: 0.6;
-        }
-
-        .actions {
-            position: relative;
-            z-index: 2;
-            text-align: center;
-            margin-bottom: 30px;
-        }
-
-        .get-started {
-            background: #ff6f3d;
-            color: white;
-            border: none;
-            padding: 15px 30px;
-            border-radius: 30px;
-            font-size: 16px;
-            cursor: pointer;
-        }
-
-        .get-started:hover {
-            background: #e65d34;
-        }
-
-        .footer-text {
-            margin-top: 15px;
-            font-size: 14px;
-            color: #ccc;
-        }
-
-        .footer-text a {
-            color: #fbb03b;
-            text-decoration: none;
-            font-weight: bold;
-        }
-
-    </style>
+    .droplet {
+      position: absolute;
+      cursor: pointer;
+    }
+  </style>
 </head>
 <body>
-<div class="container">
-    <div class="header">
-        <a href="list.html"><span class="skip">Skip</span></a>
-    </div>
-    <div class="content">
-        <h1>Find Your Best Friend</h1>
-        <div class="profile-pic">
-            <img src="image/login.png">
-        </div>
-        <p class="subtitle">To begin, tell us about yourself</p>
-    </div>
-    <div class="background">
-        <img src="image/index.jpg">
-    </div>
-    <div class="actions">
-        <a href="login-form.html"><button class="get-started">GET STARTED</button></a>
-        <p class="footer-text">
-            Already have a profile? <a href="#">Sign In</a>
-        </p>
-    </div>
+<div class="cover">
+  <img src="image/gbg.jpg" alt="Click to Start">
 </div>
+<div class="scoreboard">Score: 0</div>
+<div class="timer">Time: 15s</div>
+
+<script>
+  const body = document.body;
+  const cover = document.querySelector('.cover');
+  const scoreboard = document.querySelector('.scoreboard');
+  const timer = document.querySelector('.timer');
+  let score = 0;
+  let timeLeft = 15;
+  let gameInterval;
+  let countdown;
+  const droplets = [];
+
+  function startGame() {
+    cover.style.display = 'none';
+    gameInterval = setInterval(() => {
+      createDroplet();
+    }, 500);
+
+    countdown = setInterval(() => {
+      timeLeft--;
+      timer.textContent = `Time: ${timeLeft}s`;
+
+      if (timeLeft <= 0) {
+        clearInterval(gameInterval);
+        clearInterval(countdown);
+        alert(`Game over! Your score is ${score}`);
+        window.location.href = 'video.html';
+      }
+    }, 1000);
+  }
+
+  cover.addEventListener('click', startGame);
+
+  function randomPosition(max) {
+    return Math.random() * max;
+  }
+
+  function isOverlapping(newDroplet, x, y, width, height) {
+    for (let droplet of droplets) {
+      const rect = droplet.getBoundingClientRect();
+      if (
+              x < rect.right &&
+              x + width > rect.left &&
+              y < rect.bottom &&
+              y + height > rect.top
+      ) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  function createDroplet() {
+    const droplet = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+    const size = [70, 80, 90][Math.floor(Math.random() * 3)];
+    const pointValue = { 70: 20, 80: 30, 90: 50 }[size];
+
+    let x, y;
+    let attempts = 0;
+    const maxAttempts = 50;
+
+    do {
+      x = randomPosition(window.innerWidth - size);
+      y = randomPosition(window.innerHeight - size * 1.5 - 50) + 50;
+      attempts++;
+    } while (
+            (isOverlapping(droplet, x, y, size, size * 1.5) || y < 50) &&
+            attempts < maxAttempts
+            );
+
+    if (attempts === maxAttempts) return;
+
+    droplet.setAttribute("width", size);
+    droplet.setAttribute("height", size * 1.5);
+    droplet.setAttribute("viewBox", "0 0 400 400");
+    droplet.style.position = "absolute";
+    droplet.style.left = `${x}px`;
+    droplet.style.top = `${y}px`;
+
+    const defs = document.createElementNS("http://www.w3.org/2000/svg", "defs");
+    const radialGradient = document.createElementNS("http://www.w3.org/2000/svg", "radialGradient");
+    radialGradient.setAttribute("id", "test");
+    radialGradient.setAttribute("gradientUnits", "userSpaceOnUse");
+    radialGradient.setAttribute("r", "210");
+    radialGradient.setAttribute("gradientTransform", "translate(-46 -28)");
+
+    const stops = [
+      { offset: "1%", color: "#72f2c7" },
+      { offset: "65%", color: "#75d5f1" },
+      { offset: "82%", color: "#75a1f3" },
+      { offset: "87%", color: "#7c99f4" },
+      { offset: "97%", color: "#d997ff" }
+    ];
+
+    stops.forEach(({ offset, color }) => {
+      const stop = document.createElementNS("http://www.w3.org/2000/svg", "stop");
+      stop.setAttribute("offset", offset);
+      stop.setAttribute("stop-color", color);
+      radialGradient.appendChild(stop);
+    });
+
+    defs.appendChild(radialGradient);
+
+    const path1 = document.createElementNS("http://www.w3.org/2000/svg", "path");
+    path1.setAttribute("d", "M74,263 a50,50 0 0 1 -18,40 a2,2 0 0 1 -4,-4 a47,47 0 0 0 17,-36 a2.5,2.5 0 0 1 5,0");
+    path1.setAttribute("fill", "#4d5cb1");
+
+    const path2 = document.createElementNS("http://www.w3.org/2000/svg", "path");
+    path2.setAttribute("d", "M100,120 a140,140 0 1 0 198,0 c-26,-26 -44,-48 -44,-90 c-42,28 -128,64 -154,90");
+    path2.setAttribute("fill", "url(#test)");
+    path2.setAttribute("transform", "translate(40 -20) rotate(10)");
+
+    droplet.appendChild(defs);
+    droplet.appendChild(path1);
+    droplet.appendChild(path2);
+
+    droplet.addEventListener('click', () => {
+      score += pointValue;
+      scoreboard.textContent = `Score: ${score}`;
+      droplet.remove();
+    });
+
+    body.appendChild(droplet);
+    droplets.push(droplet);
+  }
+</script>
 </body>
 </html>
