@@ -12,8 +12,9 @@
         }
 
         .header {
-            background-color: #ffd965;
+            background-color: #6EFBD3;
             padding: 15px;
+            height: 50px;
             display: flex;
             align-items: center;
             gap: 10px;
@@ -21,7 +22,7 @@
 
         .header a {
             text-decoration: none;
-            color: #000;
+            color: #fff;
             font-size: 18px;
             font-weight: bold;
         }
@@ -50,20 +51,26 @@
             display: flex;
             justify-content: center;
             gap: 10px;
+            position: absolute;
+            width: 100%;
+            z-index: 99;
+            top: 85px;
         }
 
         .toggle-buttons button {
             padding: 10px 25px;
             border: none;
             border-radius: 20px;
-            background-color: #ffeb99;
+            background-color: #fff;
+            color: #40DED1;
             font-size: 16px;
             font-weight: bold;
             cursor: pointer;
         }
 
         .toggle-buttons .active {
-            background-color: #ffd965;
+            background-color: #40DED1;
+            color: #fff;
         }
 
         .card {
@@ -140,7 +147,7 @@
     <div class="details">
         <h2 id="card-name">Mac</h2>
         <p><span class="icon">&#128205;</span> <span id="card-distance">6.8 min</span></p>
-        <p><span class="icon">&#128205;</span> <span id="card-address">496 La Rue Rd, Davis</span></p>
+        <p><span class="icon">&#128205;</span> <span id="card-address">496 La Rue Rd, ShangHai</span></p>
         <p><span class="icon">&#128337;</span> <span id="card-age">8 months</span></p>
         <p><span class="icon">&#9794;</span> <span id="card-gender">Male</span></p>
     </div>
